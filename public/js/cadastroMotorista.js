@@ -86,8 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     [senha, confirmarSenha, email, cpf, cep, validadeCNH].forEach(removerErro);
 
-    if (senha.value.length < 6) {
-      mostrarErro(senha, 'A senha deve ter pelo menos 6 caracteres.');
+    if (senha.value.length < 8) {
+      mostrarErro(senha, 'A senha deve ter pelo menos 8 caracteres.');
       temErro = true;
     }
     if (senha.value !== confirmarSenha.value) {
@@ -155,15 +155,14 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (response.ok) {
-        alert('Cadastro realizado com sucesso!');
-        window.location.href = '/login';
+        window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso!');
       } else {
         const error = await response.json();
-        alert(`Erro no cadastro: ${error.message || 'Erro desconhecido'}`);
+        window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent(error.message || 'Erro no cadastro');
       }
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
-      alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+      window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent('Erro ao conectar com o servidor. Tente novamente mais tarde.');
     }
   });
 });
