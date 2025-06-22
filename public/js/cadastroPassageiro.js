@@ -138,33 +138,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (response.ok) {
-          const result = await response.json();
-          alert('Cadastro realizado com sucesso!');
-          window.location.href = '/login';
+          window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso!');
         } else {
           const error = await response.json();
-          alert(`Erro no cadastro: ${error.message || 'Erro desconhecido'}`);
+          window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent(error.message || 'Erro no cadastro')
         }
       } catch (error) {
+        window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent('Erro ao conectar com o servidor. Tente novamente mais tarde.');
         console.error('Erro ao enviar dados:', error);
       }
     });
 
-    function mascaraData(valor) {
-        return valor
-            .replace(/\D/g, '')
-            .replace(/(\d{2})(\d)/, '$1/$2')
-            .replace(/(\d{2})(\d)/, '$1/$2')
-            .replace(/(\d{4})\d+?$/, '$1');
-        }
-    
-    document.getElementById('dataNascimento').addEventListener('input', function(e) {
-        e.target.value = mascaraData(e.target.value);
-    });
+  function mascaraData(valor) {
+    return valor
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{4})\d+?$/, '$1');
+  }
 
-    function converterParaISO(data) {
+  document.getElementById('dataNascimento').addEventListener('input', function (e) {
+    e.target.value = mascaraData(e.target.value);
+  });
+
+  function converterParaISO(data) {
     const partes = data.split('/');
     if (partes.length !== 3) return '';
     return `${partes[2]}-${partes[1]}-${partes[0]}`;
-    }
+  }
 });

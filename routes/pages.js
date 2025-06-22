@@ -3,11 +3,25 @@ const router = express.Router();
 
 
 router.get('/cadastro-motorista', (req, res) => {
-  res.render('cadastro-motorista', {title: 'Cadastro'})
+
+  const erro = req.query.erro;
+  const sucesso = req.query.sucesso;
+
+  res.render('cadastro-motorista', {
+    title: 'Cadastro',
+    mensagemErro: erro,
+    mensagemSucesso: sucesso })
 })
 
 router.get('/cadastro-passageiro', (req, res) => {
-  res.render('cadastro-passageiro', {title: 'Cadastro'})
+
+  const erro = req.query.erro;
+  const sucesso = req.query.sucesso;
+
+  res.render('cadastro-passageiro', {
+    title: 'Cadastro',
+    mensagemErro: erro,
+    mensagemSucesso: sucesso })
 })
 
 router.get('/login', (req, res) => {

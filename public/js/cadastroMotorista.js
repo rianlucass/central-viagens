@@ -161,8 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent(error.message || 'Erro no cadastro');
       }
     } catch (error) {
-      console.error('Erro ao enviar dados:', error);
-      window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+      window.location.href = '/login?erro=Erro de conexão com o servidor';
     }
   });
 });
