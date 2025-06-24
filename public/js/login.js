@@ -61,6 +61,7 @@ form.addEventListener('submit', async function (event) {
       const result = await response.json();
 
       localStorage.setItem('token', result.token);
+      localStorage.setItem("username", result.username);
       localStorage.setItem('tipoUsuario', result.userType); 
 
       if (result.userType === 'MOTORISTA') {

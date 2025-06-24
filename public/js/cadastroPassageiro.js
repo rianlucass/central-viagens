@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
       [senha, confirmarSenha, email, cpf, cep].forEach(removerErro);
 
       // Validações
-      if (senha.value.length < 6) {
-        mostrarErro(senha, 'A senha deve ter pelo menos 6 caracteres.');
+      if (senha.value.length < 8) {
+        mostrarErro(senha, 'A senha deve ter pelo menos 8 caracteres.');
         temErro = true;
       }
 
@@ -138,13 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (response.ok) {
-          window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso!');
+          window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso');
         } else {
           const error = await response.json();
-          window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent(error.message || 'Erro no cadastro')
+          window.location.href = '/cadastro-passageiro?erro=' + encodeURIComponent(error.message || 'Erro no cadastro')
         }
       } catch (error) {
-        window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+        window.location.href = '/cadastro-passageiro?erro=' + encodeURIComponent('Erro ao conectar com o servidor. Tente novamente mais tarde.');
         console.error('Erro ao enviar dados:', error);
       }
     });

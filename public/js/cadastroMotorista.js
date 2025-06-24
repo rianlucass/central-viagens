@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (response.ok) {
-        window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso!');
+        window.location.href = '/login?sucesso=' + encodeURIComponent('Cadastro realizado com sucesso');
       } else {
         const error = await response.json();
         window.location.href = '/cadastro-motorista?erro=' + encodeURIComponent(error.message || 'Erro no cadastro');

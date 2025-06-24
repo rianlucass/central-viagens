@@ -1,0 +1,82 @@
+body {
+  background: #f8f9fa;
+  display: flex;
+}
+
+.sidebar {
+  width: 280px;
+  background: #00357e;
+  color: #ecf0f1;
+  padding: 1.5rem;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  font-size: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #3d5166;
+  margin-bottom: 1.5rem;
+}
+
+.nav-link {
+  color: #ecf0f1;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.nav-link small {
+  opacity: 0.8;
+  font-size: 0.75rem;
+}
+
+
+.nav-link:hover,
+.nav-link:focus {
+  background-color: rgba(236, 240, 241, 0.1);
+  color: #ffffff;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1.25rem;
+}
+
+.stat-card .value {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #00357e;
+}
+
+.list-group-item {
+  padding: 1rem 1.25rem;
+  border-color: rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}
