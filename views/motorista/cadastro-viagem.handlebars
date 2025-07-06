@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="/css/motorista.css">
-
 <script src="/js/auth.js"></script>
+<script src="/js/cadastro-viagem.js"></script>
+
 <!-- Sidebar -->
 <div class="sidebar">
     <nav class="nav flex-column">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/dashboard">
             <div>Início</div>
             <small>Dashboard com resumo de informações gerais</small>
         </a>
@@ -12,7 +13,7 @@
             <div>Minhas Viagens</div>
             <small>Gerencie e verifique todas suas viagens cadastradas</small>
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/cadastro-viagem">
             <div>Cadastrar Viagem</div>
             <small>Crie novas rotas de viagens para seus clientes</small>
         </a>
@@ -32,68 +33,84 @@
 </div>
 
 <main class="main">
-    <section class="bloco-viagem">
-        <h2>Cadastrar Nova Viagem</h2>
-        <p>Crie uma nova rota para seus passageiros</p>
+  <section class="bloco-viagem">
+    <h2>Cadastrar Nova Viagem</h2>
+    <p>Crie uma nova rota para seus passageiros</p>
 
-        <div class="form-box">
-            <form id="formCadastroViagem" class="formulario-viagem">
-                <!-- Linha 1 -->
-                <div class="linha-form">
-                    <input type="text" name="origem" placeholder="Origem" required>
-                    <input type="text" name="destino" placeholder="Destino" required>
-                </div>
+    <div class="form-box">
+      <form id="formCadastroViagem" class="formulario-viagem">
+        <!-- Linha 1: Estado/Cidade Origem -->
+        <div class="linha-form">
+          <select name="estadoOrigem" id="estadoOrigem" required>
+            <option value="">Estado de origem</option>
+          </select>
 
-                <!-- Linha 2 -->
-                <div class="linha-form">
-                    <input type="date" name="dataPartida" required>
-                    <input type="time" name="horario" required>
-                </div>
-
-                <!-- Linha 3 -->
-                <div class="linha-form">
-                    <input type="number" step="0.01" name="valor" placeholder="Preço por passageiro (R$)" required>
-
-                    <select name="veiculoId" id="veiculoIdSelect" required>
-                        <option value="">Selecione um Veículo</option>
-                        <!-- Populado via JS -->
-                    </select>
-                </div>
-
-
-                <!-- Observações -->
-                <textarea name="observacoes"
-                    placeholder="Coloque informações adicionais sobre a viagem aqui (ex.: 'Levo bagagem grande', 'Não aceito animais')"></textarea>
-
-                <!-- Opções adicionais -->
-                <div class="opcoes-adicionais">
-                    <div class="toggle-box">
-                        <label class="toggle-label">Aceita bagagem grande</label>
-                        <label class="switch">
-                            <input type="checkbox" name="bagagemGrande">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="toggle-box">
-                        <label class="toggle-label">Aceita animais de estimação</label>
-                        <label class="switch">
-                            <input type="checkbox" name="animaisEstimacao">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Botões -->
-                <div class="botoes-form">
-                    <button type="button" class="btn-cancelar">Cancelar</button>
-                    <button type="submit" class="btn-publicar">Publicar Viagem</button>
-                </div>
-            </form>
+          <select name="cidadeOrigem" id="cidadeOrigem" required>
+            <option value="">Cidade de origem</option>
+          </select>
         </div>
-    </section>
-</main>
 
+        <!-- Linha 2: Estado/Cidade Destino -->
+        <div class="linha-form">
+          <select name="estadoDestino" id="estadoDestino" required>
+            <option value="">Estado de destino</option>
+          </select>
+
+          <select name="cidadeDestino" id="cidadeDestino" required>
+            <option value="">Cidade de destino</option>
+          </select>
+        </div>
+
+        <!-- Linha 3: Data e Horário -->
+        <div class="linha-form">
+          <input type="date" name="dataPartida" required>
+          <input type="time" name="horario" required>
+        </div>
+
+        <!-- Linha 4: Valor, Veículo, Capacidade -->
+        <div class="linha-form">
+          <input type="number" step="0.01" name="valor" placeholder="Preço por passageiro (R$)" required>
+
+          <select name="veiculoId" id="veiculoIdSelect" required>
+            <option value="">Selecione um Veículo</option>
+          </select>
+
+          <input type="number" name="capacidadeDisponivel" id="capacidadeDisponivel"
+            placeholder="Capacidade disponível" min="1" required>
+        </div>
+
+        <!-- Observações -->
+        <textarea name="observacoes"
+          placeholder="Coloque informações adicionais sobre a viagem aqui (ex.: 'Levo bagagem grande', 'Não aceito animais')"></textarea>
+
+        <!-- Opções adicionais -->
+        <div class="opcoes-adicionais">
+          <div class="toggle-box">
+            <label class="toggle-label">Aceita bagagem grande</label>
+            <label class="switch">
+              <input type="checkbox" name="bagagemGrande">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-box">
+            <label class="toggle-label">Aceita animais de estimação</label>
+            <label class="switch">
+              <input type="checkbox" name="animaisEstimacao">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="botoes-form">
+          <button type="button" class="btn-cancelar">Cancelar</button>
+          <button type="submit" class="btn-publicar">Publicar Viagem</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
 
 <style>
     .bloco-viagem {
@@ -125,6 +142,7 @@
     .linha-form {
         display: flex;
         gap: 1rem;
+        flex-wrap: wrap;
     }
 
     .linha-form input,
@@ -134,6 +152,10 @@
         border: 1px solid #ccc;
         border-radius: 9999px;
         font-size: 0.9rem;
+    }
+
+    #capacidadeDisponivel {
+        max-width: 200px;
     }
 
     .formulario-viagem textarea {
@@ -222,41 +244,33 @@
         background-color: transparent;
         border: 1px solid #ccc;
         color: #333;
-        padding: 0.6rem 1.2rem;
+        padding: 0.55rem 1.5rem;
         border-radius: 9999px;
         font-weight: 600;
+        font-size: 0.95rem;
         cursor: pointer;
-        transition: background-color 0.3s, border-color 0.3s;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     }
 
     .btn-cancelar:hover {
-        background-color: #ffffff;
+        background-color: #f8d7da;
         border-color: #b94141;
+        color: #b94141;
     }
-
 
     .btn-publicar {
         background-color: #0047AB;
         color: white;
-        padding: 0.6rem 1.2rem;
+        padding: 0.55rem 1.5rem;
         border-radius: 9999px;
         border: none;
         font-weight: 600;
+        font-size: 0.95rem;
         cursor: pointer;
         transition: background-color 0.3s;
     }
 
     .btn-publicar:hover {
         background-color: #003080;
-    }
-
-    #capacidadeVeiculo {
-        flex: 1;
-        padding: 0.75rem;
-        border: 1px solid #ccc;
-        border-radius: 9999px;
-        font-size: 0.9rem;
-        background-color: #f5f5f5;
-        color: #333;
     }
 </style>
