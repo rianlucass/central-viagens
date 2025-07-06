@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navPublica.style.display = "none";
 
     if (username && bemVindo) {
-      bemVindo.textContent = `Olá, ${username}`;
+      bemVindo.textContent = `Bem-vindo, ${username}`;
     }
 
     if (btnLogout) {

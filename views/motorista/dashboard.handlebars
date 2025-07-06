@@ -1,87 +1,103 @@
 <link rel="stylesheet" href="/css/motorista.css">
 
 <script src="/js/auth.js"></script>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <nav class="nav flex-column">
-      <a class="nav-link" href="#">
-        <div>Início</div>
-        <small>Dashboard com resumo de informações gerais</small>
-      </a>
-      <a class="nav-link" href="#">
-        <div>Minhas Viagens</div>
-        <small>Gerencie e verifique todas suas viagens cadastradas</small>
-      </a>
-      <a class="nav-link" href="#">
-        <div>Cadastrar Viagem</div>
-        <small>Crie novas rotas de viagens para seus clientes</small>
-      </a>
-      <a class="nav-link" href="#">
-        <div>Passageiros</div>
-        <small>Lista completa de passageiro nas viagens</small>
-      </a>
-    </nav>
+<!-- Sidebar -->
+<div class="sidebar">
+  <nav class="nav flex-column">
+    <a class="nav-link" href="/dashboard">
+      <div>Início</div>
+      <small>Dashboard com resumo de informações gerais</small>
+    </a>
+    <a class="nav-link" href="#">
+      <div>Minhas Viagens</div>
+      <small>Gerencie e verifique todas suas viagens cadastradas</small>
+    </a>
+    <a class="nav-link" href="/cadastro-viagem">
+      <div>Cadastrar Viagem</div>
+      <small>Crie novas rotas de viagens para seus clientes</small>
+    </a>
+    <a class="nav-link" href="#">
+      <div>Meus Veiculos</div>
+      <small>Gerencie e verifique todos seus veículos casdastrados</small>
+    </a>
+    <a class="nav-link" href="#">
+      <div>Cadastrar Veiculo</div>
+      <small>Cadastre seu veículo para suas viagens</small>
+    </a>
+    <a class="nav-link" href="#">
+      <div>Passageiros</div>
+      <small>Lista completa de passageiro nas viagens</small>
+    </a>
+  </nav>
+</div>
+
+<!-- Conteúdo Principal -->
+<main class="main">
+  <h3 class="mb-3">Visão Geral</h3>
+  <p class="text-muted mb-4">Bem-vindo, <span id="username">username</span></p>
+
+  <!-- Estatísticas -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card stat-card">
+        <div class="value" id="viagens-mensais">0</div>
+        <h6 class="text-muted">Viagens no Mês</h6>
+        <p class="mb-0" id="viagensMes">+0% vs anterior</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card stat-card">
+        <div class="value" id="passageiro-mensais">0</div>
+        <h6 class="text-muted">Passageiros</h6>
+        <p class="mb-0" id="passageirosMes">+0% vs anterior</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card stat-card">
+        <h6 class="text-muted">Faturamento</h6>
+        <div class="value" id="faturamentoMes">R$ 0</div>
+        <span class="text-success">+0%</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Conteúdo Principal -->
-  <main class="main">
-    <h3 class="mb-3">Visão Geral</h3>
-    <p class="text-muted mb-4">Bem-vindo, <span id="nome-usuario">usuário</span></p>
-
-    <!-- Estatísticas -->
-    <div class="row g-3 mb-4">
-      <div class="col-md-4">
-        <div class="card stat-card">
-          <h6 class="text-muted">Viagens no Mês</h6>
-          <p class="mb-0" id="viagensMes">+0% vs anterior</p>
+  <!-- Conteúdo -->
+  <div class="row g-4">
+    <!-- Próximas Viagens -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header bg-white border-bottom">
+          <h5 class="mb-1">Próximas Viagens</h5>
+          <small class="text-muted">Agendadas para os próximos dias</small>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card stat-card">
-          <h6 class="text-muted">Passageiros</h6>
-          <p class="mb-0" id="passageirosMes">+0% vs anterior</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card stat-card">
-          <h6 class="text-muted">Faturamento</h6>
-          <div class="value" id="faturamentoMes">R$ 0</div>
-          <span class="text-success">+0%</span>
+        <div class="list-group list-group-flush" id="proximas-viagens">
+          <!-- Vai ser preenchido depois com JS -->
         </div>
       </div>
     </div>
 
-    <!-- Conteúdo -->
-    <div class="row g-4">
-      <!-- Próximas Viagens -->
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header bg-white border-bottom">
-            <h5 class="mb-1">Próximas Viagens</h5>
-            <small class="text-muted">Agendadas para os próximos dias</small>
-          </div>
-          <div class="list-group list-group-flush" id="proximas-viagens">
-            <!-- Vai ser preenchido depois com JS -->
-          </div>
+    <!-- Reservas Recentes -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header bg-white border-bottom">
+          <h5 class="mb-1">Reservas Recentes</h5>
+          <small class="text-muted">Últimas reservas realizadas</small>
         </div>
-      </div>
-
-      <!-- Reservas Recentes -->
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header bg-white border-bottom">
-            <h5 class="mb-1">Reservas Recentes</h5>
-            <small class="text-muted">Últimas reservas realizadas</small>
-          </div>
-          <div class="list-group list-group-flush" id="reservas-recentes">
-            <!-- Vai ser preenchido depois com JS -->
-          </div>
+        <div class="list-group list-group-flush" id="reservas-recentes">
+          <!-- Vai ser preenchido depois com JS -->
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 
-  <script>
-    const nome = localStorage.getItem("username") || "usuário";
-    document.getElementById("nome-usuario").textContent = nome;
-  </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    const spanUsername = document.getElementById("username");
+
+    if (username && spanUsername) {
+      spanUsername.textContent = username;
+    }
+  });
+</script>

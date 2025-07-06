@@ -39,6 +39,10 @@ router.get('/dashboard', (req, res)=> {
   res.render('motorista/dashboard', {title: 'Visão Geral'})
 })
 
+router.get('/cadastro-viagem', (req, res)=> {
+  res.render('motorista/cadastro-viagem', {title: 'Visão Geral'})
+})
+
 router.get('/home', (req, res) => {
   res.render('passageiro/home', {title: 'Inicio'})
 })
