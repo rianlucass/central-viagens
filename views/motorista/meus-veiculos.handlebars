@@ -1,0 +1,97 @@
+<!-- Estilos personalizados -->
+<script src="/js/auth.js"></script>
+<script src="/js/meus-veiculos.js"></script>
+<link rel="stylesheet" href="/css/motorista.css">
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <nav class="nav flex-column">
+        <a class="nav-link" href="/dashboard">
+            <div>Início</div>
+            <small>Dashboard com resumo de informações gerais</small>
+        </a>
+        <a class="nav-link" href="/minhas-viagens">
+            <div>Minhas Viagens</div>
+            <small>Gerencie e verifique todas suas viagens cadastradas</small>
+        </a>
+        <a class="nav-link" href="/cadastro-viagem">
+            <div>Cadastrar Viagem</div>
+            <small>Crie novas rotas de viagens para seus clientes</small>
+        </a>
+        <a class="nav-link" href="/meus-veiculos">
+            <div>Meus Veículos</div>
+            <small>Gerencie e verifique todos seus veículos cadastrados</small>
+        </a>
+        <a class="nav-link" href="/cadastro-veiculo">
+            <div>Cadastrar Veículo</div>
+            <small>Cadastre seu veículo para suas viagens</small>
+        </a>
+        <a class="nav-link" href="#">
+            <div>Passageiros</div>
+            <small>Lista completa de passageiros nas viagens</small>
+        </a>
+    </nav>
+</div>
+<!-- (mantém a mesma estrutura que já tem) -->
+
+<!-- Main -->
+<main class="main">
+    <section class="meus-veiculos">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2>Meus Veículos</h2>
+                <p>Gerencie os veículos que você cadastrou para realizar viagens</p>
+            </div>
+            <a href="/cadastro-veiculo" class="btn btn-primary">Novo Veículo +</a>
+        </div>
+
+        <div id="mensagemErro" class="alert alert-danger d-none mt-3" role="alert">
+            Erro ao carregar os veículos. Tente novamente.
+        </div>
+
+        <div id="containerVeiculos" class="container-veiculos mt-4"></div>
+    </section>
+</main>
+
+<style>
+    .meus-veiculos {
+        padding: 40px;
+    }
+
+    .container-veiculos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+    }
+
+    .card-veiculo {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        background: #fff;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+        transition: 0.2s ease-in-out;
+    }
+
+    .card-veiculo:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-veiculo h5 {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    .card-veiculo small {
+        color: #161616;
+    }
+
+    .card-veiculo p {
+        margin-bottom: 6px;
+    }
+
+    .btn-editar {
+        margin-top: 10px;
+    }
+    
+</style>

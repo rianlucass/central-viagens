@@ -40,7 +40,19 @@ router.get('/dashboard', (req, res)=> {
 })
 
 router.get('/cadastro-viagem', (req, res)=> {
-  res.render('motorista/cadastro-viagem', {title: 'Visão Geral'})
+  res.render('motorista/cadastro-viagem', {title: 'Cadastrar Viagem'})
+})
+
+router.get('/cadastro-veiculo', (req, res) => {
+  res.render('motorista/cadastro-veiculo', {title: 'Cadastrar Veículo'});
+})
+
+router.get('/minhas-viagens', (req, res) => {
+  res.render('motorista/minhas-viagens', {title: 'Minhas Viagens'});
+})
+
+router.get('/meus-veiculos', (req, res) => {
+  res.render('motorista/meus-veiculos', {title: 'Meus Veículos'});
 })
 
 router.get('/home', (req, res) => {

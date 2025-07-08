@@ -14,26 +14,26 @@ document.addEventListener("DOMContentLoaded", () => {
             "Authorization": "Bearer " + token
         }
     })
-        .then(res => res.json())
-        .then(veiculos => {
-            veiculos.forEach(veiculo => {
-                const option = document.createElement("option");
-                option.value = veiculo.id;
-                option.text = `${veiculo.modelo} (${veiculo.placa}) - ${veiculo.capacidade} lugares`;
-                option.dataset.capacidade = veiculo.capacidade;
-                selectVeiculo.appendChild(option);
-            });
-        })
-        .catch(err => {
-            mostrarMensagem("Erro ao carregar veículos", "danger");
+    .then(res => res.json())
+    .then(veiculos => {
+        veiculos.forEach(veiculo => {
+            const option = document.createElement("option");
+            option.value = veiculo.id;
+            option.text = `${veiculo.modelo} (${veiculo.placa}) - ${veiculo.capacidade} lugares`;
+            option.dataset.capacidade = veiculo.capacidade;
+            selectVeiculo.appendChild(option);
         });
+    })
+    .catch(err => {
+        mostrarMensagem("Erro ao carregar veículos", "danger");
+    });
 
     // Preenche capacidade automaticamente
     selectVeiculo.addEventListener("change", (e) => {
         const capacidade = e.target.selectedOptions[0].dataset.capacidade;
         const inputCapacidade = document.getElementById("capacidadeDisponivel");
         if (capacidade) {
-            inputCapacidade.value = capacidade;
+            inputCapacidade.value = capacidade - 1; // já desconta o motorista
         }
     });
 
@@ -53,20 +53,42 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const capacidadeVeiculo = parseInt(selectVeiculo.selectedOptions[0].dataset.capacidade);
+        const capacidadeDesejada = parseInt(formData.get("capacidadeDisponivel"));
+        if (capacidadeDesejada > (capacidadeVeiculo - 1)) {
+            mostrarMensagem(`A capacidade máxima permitida é ${capacidadeVeiculo - 1}, considerando o motorista.`, "danger");
+            return;
+        }
+
+        const dataPartida = formData.get("dataPartida");
+        const horarioPartida = formData.get("horario");
+        const dataHoraPartida = new Date(`${dataPartida}T${horarioPartida}:00`);
+        const agora = new Date();
+
+        if (dataHoraPartida < agora) {
+            mostrarMensagem("Não é permitido cadastrar viagens com data e hora no passado.", "danger");
+            return;
+        }
+
+        const diffMin = (dataHoraPartida - agora) / 1000 / 60;
+        if (diffMin < 60) {
+            mostrarMensagem("A viagem precisa ser cadastrada com pelo menos 1 hora de antecedência.", "danger");
+            return;
+        }
+
         const dadosViagem = {
             estadoOrigem,
             cidadeOrigem,
             estadoDestino,
             cidadeDestino,
-            dataPartida: montarDataHora(formData.get("dataPartida"), formData.get("horario")),
+            dataPartida: montarDataHora(dataPartida, horarioPartida),
             valor: parseFloat(formData.get("valor")),
             bagagemGrande: formData.get("bagagemGrande") === "on",
             animaisEstimacao: formData.get("animaisEstimacao") === "on",
             observacoes: formData.get("observacoes") || "",
             veiculoId: formData.get("veiculoId"),
-            capacidadeDisponivel: parseInt(formData.get("capacidadeDisponivel"))
+            capacidadeDisponivel: capacidadeDesejada
         };
-
 
         try {
             const resposta = await fetch("http://localhost:8080/motorista/viagem/cadastro", {
@@ -103,9 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
         alerta.className = `alert alert-${tipo} alert-dismissible fade show mt-3`;
         alerta.role = "alert";
         alerta.innerHTML = `
-      ${mensagem}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-    `;
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        `;
 
         const formBox = document.querySelector(".form-box");
         formBox.prepend(alerta);
@@ -116,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Funções de carregamento de estados e cidades
 async function carregarEstados(selectElement) {
     const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome");
     const estados = await response.json();
@@ -142,7 +165,6 @@ async function carregarCidades(estadoSigla, selectCidades) {
     });
 }
 
-// Ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
     const estadoOrigem = document.getElementById("estadoOrigem");
     const cidadeOrigem = document.getElementById("cidadeOrigem");

@@ -1,0 +1,137 @@
+<!-- Estilos personalizados -->
+<script src="/js/auth.js"></script>
+<script src="/js/minhas-viagens.js"></script>
+<link rel="stylesheet" href="/css/motorista.css">
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <nav class="nav flex-column">
+        <a class="nav-link" href="/dashboard">
+            <div>Início</div>
+            <small>Dashboard com resumo de informações gerais</small>
+        </a>
+        <a class="nav-link" href="/minhas-viagens">
+            <div>Minhas Viagens</div>
+            <small>Gerencie e verifique todas suas viagens cadastradas</small>
+        </a>
+        <a class="nav-link" href="/cadastro-viagem">
+            <div>Cadastrar Viagem</div>
+            <small>Crie novas rotas de viagens para seus clientes</small>
+        </a>
+        <a class="nav-link" href="/meus-veiculos">
+            <div>Meus Veículos</div>
+            <small>Gerencie e verifique todos seus veículos cadastrados</small>
+        </a>
+        <a class="nav-link" href="/cadastro-veiculo">
+            <div>Cadastrar Veículo</div>
+            <small>Cadastre seu veículo para suas viagens</small>
+        </a>
+        <a class="nav-link" href="#">
+            <div>Passageiros</div>
+            <small>Lista completa de passageiros nas viagens</small>
+        </a>
+    </nav>
+</div>
+
+<!-- Main -->
+<main class="main">
+    <section class="minhas-viagens">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2>Minhas Viagens</h2>
+                <p>Gerencie suas viagens programadas e passadas</p>
+            </div>
+            <a href="/cadastro-viagem" class="btn btn-primary">Nova Viagem +</a>
+        </div>
+
+        <div class="btn-group abas-status" role="group">
+            <button type="button" class="btn btn-light active" id="btn-programadas">Viagens Programadas</button>
+            <button type="button" class="btn btn-light" id="btn-em-andamento">Em Andamento</button>
+            <button type="button" class="btn btn-light" id="btn-historico">Histórico de Viagens</button>
+        </div>
+
+        <div id="mensagemErro" class="alert alert-danger d-none mt-3" role="alert">
+            Erro ao carregar as viagens. Tente novamente.
+        </div>
+
+        <div id="carregando" class="mt-3">Carregando viagens...</div>
+        <!-- Viagens Programadas -->
+        <div id="viagensProgramadas" class="container-viagens mt-4"></div>
+
+        <!-- Viagens em Andamento -->
+        <div id="viagensEmAndamento" class="container-viagens mt-4 d-none"></div>
+
+        <!-- Histórico de Viagens -->
+        <div id="historicoViagens" class="container-viagens mt-4 d-none"></div>
+    </section>
+</main>
+
+<style>
+    .minhas-viagens {
+        padding: 40px;
+    }
+
+    .abas-status {
+        margin-top: 20px;
+    }
+
+    .container-viagens {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+    }
+
+    .card-viagem {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        background: #fff;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+        transition: 0.2s ease-in-out;
+    }
+
+    .card-viagem:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-viagem .status {
+        float: right;
+        font-size: 0.85rem;
+        padding: 2px 10px;
+        border-radius: 16px;
+        font-weight: bold;
+    }
+
+    .status.DISPONIVEL {
+        background-color: #ffc107;
+        color: #000;
+    }
+
+    .status.CONCLUIDA {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .status.CANCELADA {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .status.EM_ANDAMENTO {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .card-viagem h5 {
+        margin-top: 12px;
+        font-weight: 500;
+    }
+
+    .card-viagem small {
+        color: #555;
+    }
+
+    .btn-gerenciar {
+        margin-top: 10px;
+    }
+</style>

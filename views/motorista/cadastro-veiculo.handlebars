@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/motorista.css">
 <script src="/js/auth.js"></script>
-<script src="/js/cadastro-viagem.js"></script>
+<script src="/js/cadastro-veiculo.js"></script>
 
 <!-- Sidebar -->
 <div class="sidebar">
@@ -34,78 +34,39 @@
 
 <main class="main">
   <section class="bloco-viagem">
-    <h2>Cadastrar Nova Viagem</h2>
-    <p>Crie uma nova rota para seus passageiros</p>
+    <h2>Cadastrar Novo Veículo</h2>
+    <p>Registre um novo veículo que será utilizado nas viagens</p>
 
     <div class="form-box">
-      <form id="formCadastroViagem" class="formulario-viagem">
-        <!-- Linha 1: Estado/Cidade Origem -->
+      <form id="formCadastroVeiculo" class="formulario-viagem">
+        <!-- Linha 1 -->
         <div class="linha-form">
-          <select name="estadoOrigem" id="estadoOrigem" required>
-            <option value="">Estado de origem</option>
-          </select>
-
-          <select name="cidadeOrigem" id="cidadeOrigem" required>
-            <option value="">Cidade de origem</option>
+          <input type="text" name="modelo" placeholder="Modelo (ex: Civic)" required>
+          <select name="tipo" required>
+            <option value="">Tipo de Veículo</option>
+            <option value="CARRO">Carro</option>
+            <option value="VAN">Van</option>
+            <option value="MICRO_ONIBUS">Micro Ônibus</option>
+            <option value="ONIBUS">Ônibus</option>
           </select>
         </div>
 
-        <!-- Linha 2: Estado/Cidade Destino -->
+        <!-- Linha 2 -->
         <div class="linha-form">
-          <select name="estadoDestino" id="estadoDestino" required>
-            <option value="">Estado de destino</option>
-          </select>
-
-          <select name="cidadeDestino" id="cidadeDestino" required>
-            <option value="">Cidade de destino</option>
-          </select>
+          <input type="text" name="marca" placeholder="Marca (ex: Honda)" required>
+          <input type="text" name="placa" placeholder="Placa (ex: IJK4L78)" maxlength="8" required>
         </div>
 
-        <!-- Linha 3: Data e Horário -->
+        <!-- Linha 3 -->
         <div class="linha-form">
-          <input type="date" name="dataPartida" required>
-          <input type="time" name="horario" required>
-        </div>
-
-        <!-- Linha 4: Valor, Veículo, Capacidade -->
-        <div class="linha-form">
-          <input type="number" step="0.01" name="valor" placeholder="Preço por passageiro (R$)" required>
-
-          <select name="veiculoId" id="veiculoIdSelect" required>
-            <option value="">Selecione um Veículo</option>
-          </select>
-
-          <input type="number" name="capacidadeDisponivel" id="capacidadeDisponivel" placeholder="Capacidade disponível"
-            min="1" required>
-        </div>
-
-        <!-- Observações -->
-        <textarea name="observacoes"
-          placeholder="Coloque informações adicionais sobre a viagem aqui (ex.: 'Endereço exato de partida', 'Aceito animais, com exceção de ...')"></textarea>
-
-        <!-- Opções adicionais -->
-        <div class="opcoes-adicionais">
-          <div class="toggle-box">
-            <label class="toggle-label">Aceita bagagem grande</label>
-            <label class="switch">
-              <input type="checkbox" name="bagagemGrande">
-              <span class="slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-box">
-            <label class="toggle-label">Aceita animais de estimação</label>
-            <label class="switch">
-              <input type="checkbox" name="animaisEstimacao">
-              <span class="slider"></span>
-            </label>
-          </div>
+          <input type="number" name="ano" placeholder="Ano (ex: 2020)" min="1900" max="2099" required>
+          <input type="number" name="capacidade" placeholder="Capacidade (ex: 5)" min="1" required>
         </div>
 
         <!-- Botões -->
         <div class="botoes-form">
           <button type="button" class="btn-cancelar">Cancelar</button>
-          <button type="submit" class="btn-publicar">Publicar Viagem</button>
+          <button type="submit" class="btn-publicar">Cadastrar Veículo</button>
         </div>
       </form>
     </div>
